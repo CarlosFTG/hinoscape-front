@@ -1,0 +1,15 @@
+<div [formGroup]="adminRegisterForm" >
+  <ion-item>
+    <ion-label position="fixed">Nombre de usuario</ion-label>
+    <ion-input formControlName="username"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Contraseña</ion-label>
+    <ion-input formControlName="pwd"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="fixed">Repetir Contraseña</ion-label>
+    <ion-input formControlName="pwd2"></ion-input>
+  </ion-item>
+  <ion-button  color="success" (click)="register()">Registrar Administrador</ion-button>
+</div>
