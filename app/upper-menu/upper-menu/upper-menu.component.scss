@@ -2,3 +2,7 @@
     height: 100%;
     width: 100%;
   }
+
+  ion-toolbar, ion-title {
+    --min-height: 5px;
+   }
