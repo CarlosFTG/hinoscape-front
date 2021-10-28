@@ -23,6 +23,7 @@ import { AdminboardModule } from './adminboard/adminboard.module';
 import { HomePageModule } from './home/home.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { GameboardModule } from './gameboard/gameboard.module';
+import { ChallengePresentationModule } from './modules/challenge-presentation/challenge-presentation.module';
 export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
@@ -35,7 +36,8 @@ export function jwtOptionsFactory(tokenService) {
 @NgModule({
   declarations: [AppComponent, MainComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,ReactiveFormsModule,UpperMenuModule, WelcomeModule,AdminboardModule,HomePageModule, AuthModule,GameboardModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,ReactiveFormsModule,UpperMenuModule, 
+    WelcomeModule,AdminboardModule,HomePageModule, AuthModule,GameboardModule, ChallengePresentationModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,
