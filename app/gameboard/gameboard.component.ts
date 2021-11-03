@@ -42,15 +42,22 @@ export class GameboardComponent implements OnInit {
   findCurrentChallenge(challenges:any){
     challenges.forEach(challenge => {
       if(!challenge.discovered){
-        this.openChallengeModal();
+        //TODO: Establecer reto a resolver para calcular distancias etc
+        this.currentChallenge=challenge;
+        //TODO: Pasar información de qué reto es para construir contenido del modal
+        this.openChallengeModal(challenge.name,challenge.content);
       }
     });
   }
 
-  async openChallengeModal(){
+  async openChallengeModal(challengeName,challengeContent){
     const modal = await this.modalController.create({
       component: MainComponent,
-      cssClass: 'my-custom-class'
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'name': challengeName,
+        'content': challengeContent,
+      }
     });
     return await modal.present();
   }
