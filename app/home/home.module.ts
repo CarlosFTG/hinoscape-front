@@ -6,6 +6,7 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { UpperMenuModule } from '../upper-menu/upper-menu.module';
+import { AuthModule } from '../modules/auth/auth.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { UpperMenuModule } from '../upper-menu/upper-menu.module';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    UpperMenuModule
+    UpperMenuModule,
+    
   ],
   declarations: [HomePage]
 })

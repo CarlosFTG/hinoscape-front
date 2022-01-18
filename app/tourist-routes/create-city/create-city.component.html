@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+ 
+  <form (ngSubmit)="createCity()" [formGroup]="cityDetails">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="text" placeholder="User name" formControlName="name"></ion-input>
+      </ion-item>
+    </div>
+ 
+    <ion-button type="submit" expand="block">Crear ciudad</ion-button>
+  </form>

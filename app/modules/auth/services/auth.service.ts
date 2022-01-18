@@ -8,8 +8,6 @@ import { Router } from '@angular/router';
 
 import { BehaviorSubject } from 'rxjs';
 
-import {LoginComponent} from '../components/login/login.component'
-
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
@@ -29,7 +27,7 @@ export class AuthService {
   userDetails$ = this.userDetails.asObservable();
 
   private REST_API_SERVER = environment;
-  constructor(private httpClient: HttpClient,private router: Router, private jwtHelper: JwtHelperService) { }
+  constructor(private httpClient: HttpClient, private jwtHelper: JwtHelperService) { }
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
@@ -44,22 +42,8 @@ export class AuthService {
     return throwError(errorMessage);
   }
 
-  login(loginParams){
-    let token;
-    this.httpClient.post('http://localhost:8081/api/login',loginParams).subscribe(
-      res => {
-        //@ts-ignore    
-        localStorage.setItem('JWT_TOKEN',res.token );
-        //@ts-ignore  
-        this.sendToken(res.token);
-        //@ts-ignore  
-        this.getUserDetails(atob(res.token.split('.')[1]))
-        this.router.navigate(['home/gameboard']);
-      }, 
-      err => {
-
-      }
-    )
+  login(loginParams) : Observable<any>{
+    return this.httpClient.post('http://localhost:8081/api/login',loginParams);
   }
 
   sendToken(token: String){
@@ -79,27 +63,13 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  registerAdmin(user) {
-      return this.httpClient.post('http://localhost:8081/createUserAdmin', user).subscribe(
-        res => {
-          //@ts-ignore    
-        }, 
-        err => {
-  
-        }
-      );
+  registerAdmin(user) : Observable<any> {
+      return this.httpClient.post('http://localhost:8081/createUserAdmin', user).pipe(catchError(this.handleError));
     
   }
 
-  registerUser(user) {
-      return this.httpClient.post('http://localhost:8081/createUser', user).subscribe(
-        res => {
-          //@ts-ignore    
-        }, 
-        err => {
-  
-        }
-      );
+  registerUser(user) : Observable<any>{
+      return this.httpClient.post('http://localhost:8081/createUser', user);
     
   }
 

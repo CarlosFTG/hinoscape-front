@@ -1,7 +1,9 @@
 import { Component, OnInit,Input  } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {Validators, FormBuilder, FormGroup,FormControl } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -9,38 +11,38 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  credentials: FormGroup;
 
-  loginForm: FormGroup;
-  token=null;
+  submitted = false;
 
-  constructor(private authService: AuthService,private formBuilder: FormBuilder, public modalController: ModalController
-    ) { 
-      this.loginForm = this.formBuilder.group({
-        username: ['prueba2'] ,
-        password: ['12345'],
-      });
-    }
+  constructor(public formBuilder: FormBuilder,private fb: FormBuilder, private authService: AuthService,private router: Router,public modalController: ModalController) { }
 
-    ngOnInit(): void {
-      this.authService.token$.subscribe(token => {
-        if(token !=null){
-            this.dismiss();
+  ngOnInit() {
+    this.credentials = this.fb.group({
+      username: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  login() {
+    this.submitted = true;
+    
+      this.authService.login(this.credentials.value).subscribe(
+        res => {
+          //@ts-ignore    
+          localStorage.setItem('JWT_TOKEN',res.token );
+          //@ts-ignore  
+          this.authService.sendToken(res.token);
+          //@ts-ignore  
+          //this.getUserDetails(atob(res.token.split('.')[1]))
+          this.modalController.dismiss();
+          this.router.navigate(['home/intro']);
+        }, 
+        err => {
+          console.log(err)
         }
-      
-      });
-    }
-  
-  
-  login(){
-    console.log(this.loginForm.value)
-    this.authService.login(this.loginForm.value);
+      );
+    
   }
-
-  dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
-    this.modalController.dismiss();
-  }
-
 
 }

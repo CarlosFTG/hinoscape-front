@@ -16,14 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
-import { MainComponent } from './components/main/main.component';
 import {UpperMenuModule} from '../app/upper-menu/upper-menu.module';
 import { WelcomeModule } from './welcome/welcome.module';
-import { AdminboardModule } from './adminboard/adminboard.module';
 import { HomePageModule } from './home/home.module';
 import { AuthModule } from './modules/auth/auth.module';
-import { GameboardModule } from './gameboard/gameboard.module';
-import { ChallengePresentationModule } from './modules/challenge-presentation/challenge-presentation.module';
+import { TouristRoutesModule } from './tourist-routes/tourist-routes.module';
 export function jwtOptionsFactory(tokenService) {
   return {
     tokenGetter: () => {
@@ -34,10 +31,10 @@ export function jwtOptionsFactory(tokenService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, MainComponent],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,ReactiveFormsModule,UpperMenuModule, 
-    WelcomeModule,AdminboardModule,HomePageModule, AuthModule,GameboardModule, ChallengePresentationModule],
+    WelcomeModule,HomePageModule, AuthModule, TouristRoutesModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },{
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptor,

@@ -1,15 +1,65 @@
-<div [formGroup]="userRegisterForm" >
-  <ion-item>
-    <ion-label position="fixed">Nombre de usuario</ion-label>
-    <ion-input formControlName="username"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="fixed">Contraseña</ion-label>
-    <ion-input formControlName="pwd"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label position="fixed">Repetir Contraseña</ion-label>
-    <ion-input formControlName="pwd2"></ion-input>
-  </ion-item>
-  <ion-button  color="success" (click)="register()">Registrar</ion-button>
-</div>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+ 
+<ion-content>
+ 
+  <form (ngSubmit)="register()" [formGroup]="credentials">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="text" placeholder="User name" formControlName="username"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+        <span *ngIf="username.errors?.required">Email is required</span>
+        <span *ngIf="username.errors?.email">Email is invalid</span>
+      </div> -->
+
+      <ion-item>
+        <ion-input type="text" placeholder="Name" formControlName="name"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+        <span *ngIf="username.errors?.required">Email is required</span>
+        <span *ngIf="username.errors?.email">Email is invalid</span>
+      </div> -->
+
+      <ion-item>
+        <ion-input type="text" placeholder="surname1" formControlName="surname1"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+        <span *ngIf="username.errors?.required">Email is required</span>
+        <span *ngIf="username.errors?.email">Email is invalid</span>
+      </div> -->
+
+      <ion-item>
+        <ion-input type="text" placeholder="surname2" formControlName="surname2"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+        <span *ngIf="username.errors?.required">Email is required</span>
+        <span *ngIf="username.errors?.email">Email is invalid</span>
+      </div> -->
+
+      <ion-item>
+        <ion-input type="email" placeholder="e-mail" formControlName="email"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(username.dirty || username.touched) && username.errors" class="errors">
+        <span *ngIf="username.errors?.required">Email is required</span>
+        <span *ngIf="username.errors?.email">Email is invalid</span>
+      </div> -->
+      <ion-item>
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+      </ion-item>
+      <!-- <div *ngIf="(password.dirty || password.touched) && password.errors" class="errors">
+        <span *ngIf="password.errors?.required">Password is required</span>
+        <span *ngIf="password.errors?.minlength">Password needs to be 6 characters</span>
+      </div> -->
+    </div>
+
+    <!-- <ion-datetime placeholder="Select Date"></ion-datetime> -->
+ 
+    <ion-button type="submit" expand="block">Register</ion-button>
+  </form>
+
+  <p ngIf="errorMsg">{{errorMsg}}</p>
+</ion-content>

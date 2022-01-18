@@ -3,8 +3,9 @@
     <ion-grid>
       <ion-row>
         <ion-title>Hinoscape</ion-title>
-        <app-score-board></app-score-board>
-        <ion-button *ngIf="token!= null" color="primary" (click)="navToAdmin()">Menú Admin.</ion-button>
+        
+        <ion-button *ngIf="token!= null && admin" color="primary" (click)="openMenuModal()">Menú Admin.</ion-button>
+        <ion-button *ngIf="token!= null && !admin" color="primary" (click)="openMenuModal()">Menú</ion-button>
         <ion-button *ngIf="token== null" color="success" (click)="openLoginModal()">Login</ion-button>
         <ion-button *ngIf="token== null" color="primary" (click)="openRegisterModal()">Registro</ion-button>
         <ion-button *ngIf="token!= null" color="danger" (click)="logOut()">Salir</ion-button>

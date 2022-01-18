@@ -1,0 +1,47 @@
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>
+            Lista de ciudades
+          </ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <div *ngIf="cities.length <1">
+        <p>Aún no se han registrado ciudades</p>
+      </div>
+      <div *ngIf="cities.length >0">
+        <ion-searchbar placeholder="Search..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+        <ion-list>
+          <ion-item *ngFor="let city of cities | filter:filterTerm"
+            (click)="clickItem()">
+            <ion-label>{{city.name}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+      
+    </ion-col>
+    <ion-col>
+      <div *ngIf="citySelected">
+        <ion-card >
+          <ion-card-header>
+            <ion-card-subtitle>Detalle de ciudad</ion-card-subtitle>
+            <ion-card-title>{{cardUserFullName}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Email: {{cardUserEmail}}</p>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngIf="createCitySelected">
+        <app-create-city></app-create-city>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-row>
+  </ion-row>
+  <ion-row>
+    <ion-button *ngIf="admin" color="primary" (click)="createCity()">Crear ciudad</ion-button>
+  </ion-row>
+</ion-grid>
