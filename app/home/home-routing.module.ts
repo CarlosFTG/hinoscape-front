@@ -6,6 +6,8 @@ import { IntroComponent } from '../tourist-routes/intro/intro.component';
 import { UsersComponent } from '../tourist-routes/users/users.component';
 import { RegisteredComponent } from '../welcome/registered/registered.component';
 import { WelcomeComponent } from '../welcome/welcome/welcome.component';
+import { MapComponent } from '../tourist-routes/map/map.component';
+
 import { HomePage } from './home.page';
 
 const routes: Routes = [
@@ -24,7 +26,12 @@ const routes: Routes = [
       path: 'usersDetail', component: UsersComponent,canActivate: [AuthGuard]
     },
     {
-      path: 'cities', component: CitiesComponent,canActivate: [AuthGuard]
+      path: 'cities', component: CitiesComponent,canActivate: [AuthGuard],
+      children:[
+        {
+          path: 'map', component: MapComponent,canActivate: [AuthGuard]
+        } 
+      ]
     } 
   ]}, 
   { path: '',
