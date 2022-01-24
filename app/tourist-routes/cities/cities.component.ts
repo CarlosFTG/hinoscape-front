@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router,ActivatedRoute } from '@angular/router';
+
 import { AuthService } from '../../modules/auth/services/auth.service';
 import { CitiesService } from '../services/cities.service';
 
@@ -16,7 +18,7 @@ export class CitiesComponent implements OnInit {
   createCitySelected:boolean = false;
 
 
-  constructor(private citiesService: CitiesService, private authService: AuthService) { }
+  constructor(private citiesService: CitiesService, private authService: AuthService,private router: Router,private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.getCities();
@@ -57,6 +59,12 @@ export class CitiesComponent implements OnInit {
 
   createCity(){
     this.createCitySelected=true;
+  }
+
+  watchDetail(city){
+    this.citiesService.sendCityCoords(city.coordinates);
+    this.citiesService.sendCity(city.name);
+    this.router.navigate(['home/cityDetail']);
   }
 
 }

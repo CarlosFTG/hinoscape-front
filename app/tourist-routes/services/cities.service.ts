@@ -14,6 +14,9 @@ export class CitiesService {
   private city = new BehaviorSubject<Object>(null);
   city$ = this.city.asObservable();
 
+  private cityCoords = new BehaviorSubject<string>(null);
+  cityCoords$ = this.cityCoords.asObservable();
+
   constructor(private httpClient:HttpClient) { }
 
   getCities() : Observable<any>{
@@ -36,5 +39,9 @@ export class CitiesService {
 
   sendCity(city){
     this.city.next(city);
+  }
+
+  sendCityCoords(cityCoords){
+    this.cityCoords.next(cityCoords);
   }
 }

@@ -32,6 +32,8 @@ export class CreateCityComponent implements OnInit {
     this.citiesService.createCity(this.cityDetails.value).subscribe(
       res => {
         this.citiesService.sendCity(res);
+        this.citiesService.sendCityCoords(res.coordinates);
+        this.citiesService.sendCity(res.name);
         console.log(res)
         this.openGenericModal();
       }, 
@@ -46,8 +48,11 @@ export class CreateCityComponent implements OnInit {
       component: GenericModalComponent,
       cssClass: 'my-custom-class',
       componentProps: {
-        'text': "¿Desea añadir rutas a esta ciudad?",
-        'action:':1
+        'params':{
+          'text':"¿Desea añadir rutas a esta ciudat?",
+          'action:':1,
+          'param1': this.cityDetails.value
+        }
       }
     });
     return await modal.present();

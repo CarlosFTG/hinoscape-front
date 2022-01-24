@@ -17,6 +17,9 @@
           <ion-item *ngFor="let city of cities | filter:filterTerm"
             (click)="clickItem()">
             <ion-label>{{city.name}}</ion-label>
+            <ion-button  color="primary" (click)="watchDetail(city)">Ver detalle</ion-button>
+            <ion-button  color="danger">Eliminar</ion-button>
+
           </ion-item>
         </ion-list>
       </div>
@@ -26,7 +29,7 @@
       <div *ngIf="citySelected">
         <ion-card >
           <ion-card-header>
-            <ion-card-subtitle>Detalle de ciudad</ion-card-subtitle>
+            <ion-card-subtitle >Detalle de ciudad</ion-card-subtitle>
             <ion-card-title>{{cardUserFullName}}</ion-card-title>
           </ion-card-header>
           <ion-card-content>

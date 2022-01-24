@@ -9,6 +9,7 @@ import { WelcomeComponent } from '../welcome/welcome/welcome.component';
 import { MapComponent } from '../tourist-routes/map/map.component';
 
 import { HomePage } from './home.page';
+import { CityDetailComponent } from '../tourist-routes/city-detail/city-detail.component';
 
 const routes: Routes = [
   {
@@ -29,8 +30,18 @@ const routes: Routes = [
       path: 'cities', component: CitiesComponent,canActivate: [AuthGuard],
       children:[
         {
-          path: 'map', component: MapComponent,canActivate: [AuthGuard]
+          path: 'cityDetail', component: CityDetailComponent,canActivate: [AuthGuard]
         } 
+      ]
+    },{
+      path: 'map', component: MapComponent
+    },
+    {
+      path: 'cityDetail', component: CityDetailComponent,canActivate: [AuthGuard],
+      children:[
+        {
+          path: 'map', component: MapComponent
+        }
       ]
     } 
   ]}, 

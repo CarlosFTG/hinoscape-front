@@ -7,6 +7,7 @@ import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { UpperMenuModule } from '../upper-menu/upper-menu.module';
 import { AuthModule } from '../modules/auth/auth.module';
+import { TouristRoutesModule } from '../tourist-routes/tourist-routes.module';
 
 
 @NgModule({
@@ -16,6 +17,7 @@ import { AuthModule } from '../modules/auth/auth.module';
     IonicModule,
     HomePageRoutingModule,
     UpperMenuModule,
+    TouristRoutesModule
     
   ],
   declarations: [HomePage]
