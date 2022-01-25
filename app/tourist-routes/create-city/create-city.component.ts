@@ -34,7 +34,6 @@ export class CreateCityComponent implements OnInit {
         this.citiesService.sendCity(res);
         this.citiesService.sendCityCoords(res.coordinates);
         this.citiesService.sendCity(res.name);
-        console.log(res)
         this.openGenericModal();
       }, 
       err => {

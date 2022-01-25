@@ -2,14 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CitiesService } from '../services/cities.service';
 import { MapService } from '../services/map.service';
 
-import Map from 'ol/Map';
-import View from 'ol/View';
-import VectorLayer from 'ol/layer/Vector';
-import Style from 'ol/style/Style';
-import Icon from 'ol/style/Icon';
-import OSM from 'ol/source/OSM';
-import * as olProj from 'ol/proj';
-import TileLayer from 'ol/layer/Tile';
+import { ModalController } from '@ionic/angular';
+import { CreateRouteModalComponent } from '../create-route-modal/create-route-modal.component';
+import { RoutesService } from '../services/routes.service';
+
 
 @Component({
   selector: 'app-map',
@@ -20,9 +16,9 @@ export class MapComponent implements OnInit {
 
   centerMapCoords: string;
   map;
+  createRoute:Boolean=false;
 
-
-  constructor(private citiesService: CitiesService, private mapService: MapService) { }
+  constructor(private citiesService: CitiesService, private mapService: MapService,public modalController: ModalController,private routesService: RoutesService) { }
 
   ngOnInit() {
     this.citiesService.cityCoords$.subscribe(cityCoords => {
@@ -31,7 +27,29 @@ export class MapComponent implements OnInit {
       }
 
     });
+
+    this.routesService.createRoute$.subscribe(createRoute => {
+      if(createRoute!=null){
+        this.createRoute=createRoute;
+      }
+    })
     this.mapService.renderMap(this.centerMapCoords);
   }
+
+  async openCreateRouteModal(event){
+    if(this.createRoute){
+      let coords=this.mapService.getCoordsOnClick(event);
+      const modal = await this.modalController.create({
+        component: CreateRouteModalComponent,
+        cssClass: 'my-custom-class',
+        componentProps: {
+          'coords': coords,
+        }
+      });
+      return await modal.present();
+    }
+    
+  }
+ 
 
 }

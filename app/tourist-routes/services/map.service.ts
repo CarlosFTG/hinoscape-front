@@ -11,6 +11,9 @@ import Feature from 'ol/Feature';
 import TileLayer from 'ol/layer/Tile.js';
 import { BingMaps } from 'ol/source';
 import View from 'ol/View';
+import * as olProj from 'ol/proj';
+import { RoutesService } from './routes.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -57,5 +60,12 @@ export class MapService {
       interactions: interactions
 
     });
+  }
+
+  getCoordsOnClick(event:any){
+    let coords =this.map.getEventCoordinate(event)
+    var lonlat = olProj.transform([coords[0],coords[1]], 'EPSG:3857', 'EPSG:4326');
+    let coordsString = "POINT("+lonlat[0]+ " "+lonlat[1]+")"
+    return coordsString;
   }
 }

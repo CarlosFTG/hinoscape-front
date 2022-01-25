@@ -9,9 +9,10 @@ import { CitiesComponent } from './cities/cities.component';
 import { CreateCityComponent } from './create-city/create-city.component';
 import { MapComponent } from './map/map.component';
 import { CityDetailComponent } from './city-detail/city-detail.component';
+import { CreateRouteModalComponent } from './create-route-modal/create-route-modal.component';
 
 @NgModule({
-  declarations: [UsersComponent,CitiesComponent,CreateCityComponent, MapComponent,CityDetailComponent],
+  declarations: [UsersComponent,CitiesComponent,CreateCityComponent, MapComponent,CityDetailComponent,CreateRouteModalComponent],
   imports: [
     BrowserModule ,CommonModule, IonicModule,Ng2SearchPipeModule,FormsModule,ReactiveFormsModule
   ],

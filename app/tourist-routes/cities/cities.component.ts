@@ -42,7 +42,6 @@ export class CitiesComponent implements OnInit {
     this.citiesService.getCities().subscribe(
       data=>{
        this.cities=data;
-       console.log(this.cities)    
       }
     )
    }
@@ -63,7 +62,7 @@ export class CitiesComponent implements OnInit {
 
   watchDetail(city){
     this.citiesService.sendCityCoords(city.coordinates);
-    this.citiesService.sendCity(city.name);
+    this.citiesService.sendCity(city);
     this.router.navigate(['home/cityDetail']);
   }
 

@@ -1,5 +1,63 @@
-<h4>{{cityName}}</h4>
+<h4>{{city.name}}</h4>
 <div>
-<app-map></app-map>
+  <app-map></app-map>
 </div>
-<p>hols</p>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <!-- <ion-header>
+                <ion-navbar>
+                  <ion-title>
+                    Infinite Scroll
+                  </ion-title>
+                </ion-navbar>
+              </ion-header> -->
+      <p *ngIf="routes.length <1">Esta ciudad aún no tiene rutas</p>
+      <div *ngIf="routes.length >0">
+        <ion-list>
+          <ion-item *ngFor="let route of routes">
+            <ion-label>{{route.name}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-col>
+    <ion-col>
+      <ion-button *ngIf="!creationActive" color="primary" (click)="createRoute()">Crear ruta</ion-button>
+      <ion-button *ngIf="creationActive" color="primary" (click)="saveRoute()">Guardar ruta</ion-button>
+      <div *ngIf="routePointsList.length < 1 && creationActive">
+        <p>Aún no se han añadido puntos</p>
+      </div>
+      <div *ngIf="routePointsList.length > 0">
+        <ion-list>
+          <ion-item *ngFor="let routePoint of routePointsList">
+            <ion-label>{{routePoint.name}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </ion-col>
+    <!-- Formulario para datos de ruta -->
+    <ion-col *ngIf="creationActive">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Detalles de la ruta</ion-title>
+        </ion-toolbar>
+      </ion-header>
+       
+      <ion-content>
+       
+        <form  [formGroup]="routeInfo">
+          <div class="input-group">
+            <ion-item>
+              <ion-input type="text" placeholder="Nombre de la ruta" formControlName="name"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="text" placeholder="Observaciones" formControlName="observations"></ion-input>
+            </ion-item>
+          </div>
+       
+          <!-- <ion-button type="submit" expand="block">Guardar</ion-button> -->
+        </form>
+      </ion-content>
+    </ion-col>
+  </ion-row>
+</ion-grid>

@@ -31,7 +31,6 @@ export class UsersComponent implements OnInit {
    this.touristRoutesService.getUsers().subscribe(
      data=>{
       this.users=data;
-      console.log(this.users)    
      }
    )
   }
