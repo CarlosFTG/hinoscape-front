@@ -16,11 +16,12 @@ export class MapComponent implements OnInit {
 
   centerMapCoords: string;
   map;
-  createRoute:Boolean=false;
+  createRoute:Boolean;
 
   constructor(private citiesService: CitiesService, private mapService: MapService,public modalController: ModalController,private routesService: RoutesService) { }
 
   ngOnInit() {
+    this.createRoute=false;
     this.citiesService.cityCoords$.subscribe(cityCoords => {
       if(cityCoords != null){
         this.centerMapCoords=cityCoords;

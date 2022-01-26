@@ -14,7 +14,8 @@ import { ModalController } from '@ionic/angular';
 export class CreateRouteModalComponent implements OnInit {
   @Input() coords: object;
   stopInfo: FormGroup;
-
+  creationError: Boolean=false;
+  errorText:String
   
   constructor(private fb: FormBuilder, private routeService: RoutesService,private modalController: ModalController) { }
 
@@ -27,8 +28,14 @@ export class CreateRouteModalComponent implements OnInit {
   }
 
   savePoint(){
-    this.routeService.sendPoint(this.stopInfo.value);
-    this.modalController.dismiss();
+    if(this.stopInfo.get('name').value != ""){
+      this.routeService.sendPoint(this.stopInfo.value);
+      this.modalController.dismiss();
+    }else{
+      this.creationError=true;
+      this.errorText="Debe informar el nombre del punto"
+    }
+    
   }
 
   saveRoute(){

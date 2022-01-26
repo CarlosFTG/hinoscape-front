@@ -18,8 +18,10 @@ export class CityDetailComponent implements OnInit {
   page = 0;
   maximumPages = 3;
   creationActive:Boolean=false;
-  routePointsList = [];
+  routePointsList = new Array;;
   routeInfo: FormGroup;
+  creationError: Boolean=false;
+  errorText:String
 
   slideOpts = {
     initialSlide: 1,
@@ -29,6 +31,7 @@ export class CityDetailComponent implements OnInit {
   constructor(private citiesService: CitiesService, private navCtrl: NavController, private routesService:RoutesService,private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.routePointsList = new Array;
     this.citiesService.city$.subscribe(city => {
 
       if (city != null) {
@@ -61,24 +64,31 @@ export class CityDetailComponent implements OnInit {
     });
   }
 
+  //método para iniciar la creación de rutas. Envía true para que en mapa permita abrir modal al obtener coordenadas
   createRoute(){
     this.creationActive=true;
     this.routesService.sendCreateRoute(true);
   }
 
   saveRoute(){
-    /* let route = {
-      'name':null,
-      'observations':null,
-      'routePoints':this.routePointsList,
-      //@ts-ignore
-      'city':this.city.id
-    } */
-    this.routesService.saveRoute(this.routeInfo.value).subscribe(
-      res=>{
-        this.routes.push(res);
-      }
-    )
+    if(this.routePointsList.length > 0 && this.routeInfo.get('name').value != ""){
+      this.routesService.saveRoute(this.routeInfo.value).subscribe(
+        res=>{
+          /* if(res.errorMsg.length > 0){
+            this.creationError=true;
+            this.errorText="Se ha producido un error al registrar la ruta"
+          }else{ */
+            this.routePointsList = new Array();
+            this.routes.push(res);
+            this.routeInfo.reset();
+            this.creationActive=false;
+          //}
+          
+        }
+      )
+    }else{
+      this.creationError=true;
+      this.errorText="Debe seleccionar al menos un punto y/o informar el nombre de la ruta"
+    }
   }
-
 }

@@ -12,7 +12,7 @@ import { CitiesService } from '../services/cities.service';
 })
 export class CitiesComponent implements OnInit {
 
-  cities: any[] = null;
+  cities=new Array;
   admin:boolean = false;
   citySelected:boolean = false;
   createCitySelected:boolean = false;
