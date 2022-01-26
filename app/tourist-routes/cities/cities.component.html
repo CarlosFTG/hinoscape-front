@@ -18,7 +18,7 @@
             (click)="clickItem()">
             <ion-label>{{city.name}}</ion-label>
             <ion-button  color="primary" (click)="watchDetail(city)">Ver detalle</ion-button>
-            <ion-button  color="danger">Eliminar</ion-button>
+            <ion-button *ngIf="admin"  color="danger">Eliminar</ion-button>
 
           </ion-item>
         </ion-list>

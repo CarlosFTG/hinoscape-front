@@ -16,7 +16,7 @@
       <div *ngIf="routes.length >0">
         <ion-list>
           <ion-item *ngFor="let route of routes">
-            <ion-label>{{route.name}}</ion-label>
+            <ion-label type="button" (click)="whatchDetail(route)">{{route.name}}</ion-label>
           </ion-item>
         </ion-list>
       </div>
@@ -37,7 +37,7 @@
       <p *ngIf="creationError">{{errorText}}</p>
     </ion-col>
     <!-- Formulario para datos de ruta -->
-    <ion-col *ngIf="creationActive">
+    <ion-col *ngIf="creationActive || routeSelected">
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>Detalles de la ruta</ion-title>

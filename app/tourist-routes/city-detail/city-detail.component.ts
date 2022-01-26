@@ -21,7 +21,8 @@ export class CityDetailComponent implements OnInit {
   routePointsList = new Array;;
   routeInfo: FormGroup;
   creationError: Boolean=false;
-  errorText:String
+  errorText:String;
+  routeSelected:Boolean=false;
 
   slideOpts = {
     initialSlide: 1,
@@ -66,14 +67,21 @@ export class CityDetailComponent implements OnInit {
 
   //método para iniciar la creación de rutas. Envía true para que en mapa permita abrir modal al obtener coordenadas
   createRoute(){
+    this.clearForm();
+    this.routePointsList = new Array();
     this.creationActive=true;
     this.routesService.sendCreateRoute(true);
   }
 
   saveRoute(){
+    //@ts-ignore
+    this.routeInfo.get('city').setValue(this.city.id);
+    this.routeInfo.get('routePoints').setValue(this.routePointsList);
+    console.log(this.routeInfo.value)
     if(this.routePointsList.length > 0 && this.routeInfo.get('name').value != ""){
       this.routesService.saveRoute(this.routeInfo.value).subscribe(
         res=>{
+          //TODO: Control de errores del back
           /* if(res.errorMsg.length > 0){
             this.creationError=true;
             this.errorText="Se ha producido un error al registrar la ruta"
@@ -82,6 +90,8 @@ export class CityDetailComponent implements OnInit {
             this.routes.push(res);
             this.routeInfo.reset();
             this.creationActive=false;
+            this.clearForm();
+
           //}
           
         }
@@ -91,4 +101,25 @@ export class CityDetailComponent implements OnInit {
       this.errorText="Debe seleccionar al menos un punto y/o informar el nombre de la ruta"
     }
   }
+
+  whatchDetail(route){
+    this.creationActive=false;
+    this.routesService.sendCreateRoute(false);
+    this.routeInfo.get('name').setValue(route.name);
+    this.routeInfo.get('observations').setValue(route.observations);
+    this.routeSelected=true;
+    this.routePointsList = new Array;
+    route.routePoints.forEach(routePoint => {
+      this.routePointsList.push(routePoint)
+    });
+  }
+  clearForm(){
+    this.routeInfo = this.fb.group({
+      name: [''],
+      observations: [''],
+      city:[''],
+      routePoints:['']
+    });
+  }
 }
+
