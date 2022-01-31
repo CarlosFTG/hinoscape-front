@@ -4,6 +4,7 @@ import { CitiesService } from '../services/cities.service';
 import { RoutesService } from '../services/routes.service';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MapService } from '../services/map.service';
 
 
 @Component({
@@ -29,7 +30,7 @@ export class CityDetailComponent implements OnInit {
     speed: 400,
   };
 
-  constructor(private citiesService: CitiesService, private navCtrl: NavController, private routesService:RoutesService,private fb: FormBuilder) { }
+  constructor(private citiesService: CitiesService, private navCtrl: NavController, private routesService:RoutesService,private fb: FormBuilder,private mapService:MapService) { }
 
   ngOnInit() {
     this.routePointsList = new Array;
@@ -44,6 +45,8 @@ export class CityDetailComponent implements OnInit {
             //@ts-ignore  
             this.routes.push(this.city.routesList[i]);
           }
+          //this.mapService.createRoutesLineString(this.routes);
+          this.mapService.loadedRoutes =this.routes;
         }
 
       }
