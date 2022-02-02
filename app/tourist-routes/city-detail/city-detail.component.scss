@@ -1,0 +1,25 @@
+.c{
+    position:relative;
+    background:white;
+    max-height:200px;
+    float:left;
+    width:300px;
+    height:300px;
+    overflow:hidden;
+    overflow-y:auto;
+  }
+  .card-home{
+    position:absolute;
+    margin:20px;
+      top:0;
+        animation: scroll 10s linear 1s infinite;
+  }
+  span {
+    min-width:300px;
+    min-height:40px;
+    display:block;
+    color:white;
+    margin:5px;
+    background:#B7C595;
+  }
+  

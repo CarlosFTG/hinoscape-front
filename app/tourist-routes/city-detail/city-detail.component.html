@@ -5,20 +5,14 @@
 <ion-grid>
   <ion-row>
     <ion-col>
-      <!-- <ion-header>
-                <ion-navbar>
-                  <ion-title>
-                    Infinite Scroll
-                  </ion-title>
-                </ion-navbar>
-              </ion-header> -->
       <p *ngIf="routes.length <1">Esta ciudad aún no tiene rutas</p>
       <div *ngIf="routes.length >0">
-        <ion-list>
-          <ion-item *ngFor="let route of routes">
-            <ion-label type="button" (click)="whatchDetail(route)">{{route.name}}</ion-label>
-          </ion-item>
-        </ion-list>
+        <h4>Rutas</h4>
+        <div class="c">
+          <div class="card-home">
+            <span type="button" (click)="whatchDetail(route)" *ngFor="let route of routes">{{route.name}}</span>
+          </div>
+        </div>
       </div>
     </ion-col>
     <ion-col>
@@ -28,11 +22,12 @@
         <p>Aún no se han añadido puntos</p>
       </div>
       <div *ngIf="routePointsList.length > 0">
-        <ion-list>
-          <ion-item *ngFor="let routePoint of routePointsList">
-            <ion-label>{{routePoint.name}}</ion-label>
-          </ion-item>
-        </ion-list>
+        <h4>Puntos ruta</h4>
+        <div class="c">
+          <div class="card-home">
+            <span type="button" *ngFor="let routePoint of routePointsList">{{routePoint.name}}</span>
+          </div>
+        </div>
       </div>
       <p *ngIf="creationError">{{errorText}}</p>
     </ion-col>
@@ -43,10 +38,10 @@
           <ion-title>Detalles de la ruta</ion-title>
         </ion-toolbar>
       </ion-header>
-       
+
       <ion-content>
-       
-        <form  [formGroup]="routeInfo">
+
+        <form [formGroup]="routeInfo">
           <div class="input-group">
             <ion-item>
               <ion-input type="text" placeholder="Nombre de la ruta" formControlName="name"></ion-input>
@@ -55,7 +50,7 @@
               <ion-input type="text" placeholder="Observaciones" formControlName="observations"></ion-input>
             </ion-item>
           </div>
-       
+
           <!-- <ion-button type="submit" expand="block">Guardar</ion-button> -->
         </form>
       </ion-content>
